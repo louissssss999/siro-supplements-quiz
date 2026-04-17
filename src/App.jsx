@@ -79,9 +79,9 @@ const I18N = {
     next: "Next",
     submit: "Submit Survey",
     successTitle: "Thank you for your feedback!",
-    successReward: "Create an account and receive 300 SiRo points.",
-    successBreakdown: "100 points for creating an account + 200 points for completing the survey.",
-    createAccount: "Create account",
+    successReward: "You have received 200 SiRo Points on your SiRo Supplements account.",
+    successBreakdown: "Log in to view your SiRo Points and start saving today!",
+    createAccount: "Continue →",
     loyaltyUrl: "https://sirosupplements.com/en/pages/loyalty-program",
     errors: {
       step1: "Please select a language.",
@@ -104,6 +104,13 @@ const I18N = {
       tolerance: "Stomach tolerance",
       ease: "Ease of use",
       aftertaste: "Aftertaste"
+    },
+    ratingScale: {
+      taste: { low: "Not tasty", high: "Very tasty" },
+      texture: { low: "Poor mix", high: "Mixes very well" },
+      tolerance: { low: "Hard to digest", high: "Very easy to digest" },
+      ease: { low: "Difficult", high: "Very easy" },
+      aftertaste: { low: "Unpleasant", high: "Very pleasant" }
     },
     ageOptions: ["Under 18", "18-24", "25-34", "35-55", "56+"],
     genders: ["Male", "Female", "Other", "Prefer not to say"]
@@ -149,9 +156,9 @@ const I18N = {
     next: "Suivant",
     submit: "Envoyer l'enquete",
     successTitle: "Merci pour votre retour !",
-    successReward: "Creez un compte et recevez 300 points SiRo.",
-    successBreakdown: "100 points pour la creation du compte + 200 points pour avoir complete l'enquete.",
-    createAccount: "Creer un compte",
+    successReward: "Vous avez reçu 200 points SiRo sur votre compte SiRo Supplements.",
+    successBreakdown: "Connectez-vous pour consulter vos points SiRo et commencer à économiser !",
+    createAccount: "Continuer →",
     loyaltyUrl: "https://sirosupplements.com/fr/pages/loyalty-program",
     errors: {
       step1: "Veuillez selectionner une langue.",
@@ -174,6 +181,13 @@ const I18N = {
       tolerance: "Tolerance digestive",
       ease: "Facilite d'utilisation",
       aftertaste: "Arriere-gout"
+    },
+    ratingScale: {
+      taste: { low: "Peu savoureux", high: "Tres savoureux" },
+      texture: { low: "Se melange mal", high: "Se melange tres bien" },
+      tolerance: { low: "Difficile a digerer", high: "Tres digeste" },
+      ease: { low: "Difficile", high: "Tres facile" },
+      aftertaste: { low: "Desagreable", high: "Tres agreable" }
     },
     ageOptions: ["Moins de 18 ans", "18-24", "25-34", "35-55", "56+"],
     genders: ["Homme", "Femme", "Autre", "Prefere ne pas dire"]
@@ -219,9 +233,9 @@ const I18N = {
     next: "Volgende",
     submit: "Quiz verzenden",
     successTitle: "Bedankt voor je feedback!",
-    successReward: "Maak een account en ontvang 300 SiRo-punten.",
-    successBreakdown: "100 punten voor het aanmaken van een account + 200 punten voor het invullen van de enquête.",
-    createAccount: "Account aanmaken",
+    successReward: "Je hebt 200 SiRo-punten ontvangen op je SiRo Supplements account.",
+    successBreakdown: "Log in om je SiRo-punten te bekijken en vandaag nog te beginnen met sparen!",
+    createAccount: "Doorgaan →",
     loyaltyUrl: "https://sirosupplements.com/pages/loyalty-program",
     errors: {
       step1: "Selecteer een taal.",
@@ -244,6 +258,13 @@ const I18N = {
       tolerance: "Maagtolerantie",
       ease: "Gebruiksgemak",
       aftertaste: "Nasmaak"
+    },
+    ratingScale: {
+      taste: { low: "Niet lekker", high: "Heel lekker" },
+      texture: { low: "Mengt slecht", high: "Mengt heel goed" },
+      tolerance: { low: "Moeilijk verteerbaar", high: "Zeer goed verteerbaar" },
+      ease: { low: "Moeilijk", high: "Heel makkelijk" },
+      aftertaste: { low: "Onaangenaam", high: "Heel aangenaam" }
     },
     ageOptions: ["Onder 18", "18-24", "25-34", "35-55", "56+"],
     genders: ["Man", "Vrouw", "Anders", "Zeg ik liever niet"]
@@ -280,7 +301,7 @@ const StepBadge = ({ label, index, active, completed }) => (
   </div>
 )
 
-const Star = ({ filled }) => <span className={`text-base ${filled ? "text-[#111111]" : "text-[#CBD5E1]"}`}>★</span>
+const Star = ({ filled }) => <span className={`text-base ${filled ? "text-[#D4AF37]" : "text-[#CBD5E1]"}`}>★</span>
 
 function App() {
   const [step, setStep] = useState(1)
@@ -741,17 +762,21 @@ function App() {
                               {ratingCategories.map((category) => (
                                 <div key={category} className="rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-3 py-2">
                                   <p className="text-xs font-semibold text-[#111827]">{copy.ratings[category]}</p>
-                                  <div className="mt-1 flex items-center gap-1">
-                                    {[1, 2, 3, 4, 5].map((value) => (
-                                      <button
-                                        key={value}
-                                        type="button"
-                                        onClick={() => handleProductRating(product, category, value)}
-                                        className="rounded p-1 hover:bg-[#ECEEF1]"
-                                      >
-                                        <Star filled={(ratingData[category] || 0) >= value} />
-                                      </button>
-                                    ))}
+                                  <div className="mt-1 flex items-center justify-between gap-2 text-[11px] text-[#6B7280]">
+                                    <span>{copy.ratingScale[category].low}</span>
+                                    <div className="flex items-center gap-1">
+                                      {[1, 2, 3, 4, 5].map((value) => (
+                                        <button
+                                          key={value}
+                                          type="button"
+                                          onClick={() => handleProductRating(product, category, value)}
+                                          className="rounded p-1 hover:bg-[#ECEEF1]"
+                                        >
+                                          <Star filled={(ratingData[category] || 0) >= value} />
+                                        </button>
+                                      ))}
+                                    </div>
+                                    <span className="text-right">{copy.ratingScale[category].high}</span>
                                   </div>
                                 </div>
                               ))}
@@ -919,7 +944,7 @@ function App() {
 
           {step === 6 && (
             <div className="rounded-[28px] border border-[#E5E7EB] bg-[#F3F4F6] p-7 text-center sm:p-9">
-              <div className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl text-[#111111]">🎉</div>
+              <img src={siroLogo} alt="SiRo Supplements" className="mx-auto h-14 w-auto" />
               <h2 className="mt-4 text-2xl font-semibold text-[#111827]">{copy.successTitle}</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm text-[#6B7280]">{copy.successReward}</p>
               <p className="mx-auto mt-2 max-w-2xl text-sm font-medium text-[#374151]">{copy.successBreakdown}</p>
