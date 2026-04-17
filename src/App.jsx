@@ -68,6 +68,9 @@ const I18N = {
     demographicsTitle: "Demographics & Submit",
     demographicsSubtitle: "Finish the survey so we can reward you with SiRo points.",
     age: "Age",
+    email: "Email",
+    emailPlaceholder: "you@example.com",
+    emailHelper: "So that we can give your reward.",
     chooseAge: "Choose age group",
     gender: "Gender",
     zipCode: "Zip Code",
@@ -86,7 +89,7 @@ const I18N = {
       step2other: "Please specify the selected 'Other' product.",
       step3: "Please complete ratings, short description, and results for each selected product.",
       step4: "Please select at least one association and tell us what we can improve.",
-      step5: "Please complete the age, gender, and zip code fields."
+      step5: "Please complete the age, email, gender, and zip code fields."
     },
     associations: {
       fastShipping: "Fast shipping",
@@ -135,6 +138,9 @@ const I18N = {
     demographicsTitle: "Demographie & Envoi",
     demographicsSubtitle: "Terminez l'enquete pour recevoir vos points SiRo.",
     age: "Age",
+    email: "Email",
+    emailPlaceholder: "vous@exemple.com",
+    emailHelper: "Afin que nous puissions vous donner votre recompense.",
     chooseAge: "Choisissez une tranche d'age",
     gender: "Genre",
     zipCode: "Code postal",
@@ -153,7 +159,7 @@ const I18N = {
       step2other: "Veuillez preciser le produit 'Other' selectionne.",
       step3: "Veuillez completer les notes, la description courte et les resultats pour chaque produit.",
       step4: "Veuillez selectionner au moins une association et indiquer ce que nous pouvons ameliorer.",
-      step5: "Veuillez completer l'age, le genre et le code postal."
+      step5: "Veuillez completer l'age, l'email, le genre et le code postal."
     },
     associations: {
       fastShipping: "Livraison rapide",
@@ -202,6 +208,9 @@ const I18N = {
     demographicsTitle: "Demografie & Verzenden",
     demographicsSubtitle: "Rond de quiz af om je SiRo-punten te ontvangen.",
     age: "Leeftijd",
+    email: "E-mail",
+    emailPlaceholder: "jij@voorbeeld.com",
+    emailHelper: "Zodat we je beloning kunnen toekennen.",
     chooseAge: "Kies leeftijdsgroep",
     gender: "Geslacht",
     zipCode: "Postcode",
@@ -220,7 +229,7 @@ const I18N = {
       step2other: "Specificeer het geselecteerde 'Other' product.",
       step3: "Vul beoordelingen, korte beschrijving en resultaten in voor elk geselecteerd product.",
       step4: "Selecteer minstens een associatie en vertel wat we kunnen verbeteren.",
-      step5: "Vul leeftijd, geslacht en postcode in."
+      step5: "Vul leeftijd, e-mail, geslacht en postcode in."
     },
     associations: {
       fastShipping: "Snelle levering",
@@ -251,6 +260,7 @@ const initialAnswers = {
   improvement: "",
   recommend: 5,
   age: "",
+  email: "",
   gender: "",
   zip: ""
 }
@@ -331,7 +341,8 @@ function App() {
     }
 
     if (targetStep === 5) {
-      return answers.age && answers.gender && answers.zip.trim() ? "" : copy.errors.step5
+      const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((answers.email || "").trim())
+      return answers.age && emailIsValid && answers.gender && answers.zip.trim() ? "" : copy.errors.step5
     }
 
     return ""
@@ -857,6 +868,18 @@ function App() {
                         </option>
                       ))}
                     </select>
+                  </label>
+                  <label className="space-y-1">
+                    <span className="text-sm font-semibold text-[#111827]">{copy.email}</span>
+                    <input
+                      value={answers.email}
+                      onChange={(event) => setField("email", event.target.value)}
+                      type="email"
+                      required
+                      placeholder={copy.emailPlaceholder}
+                      className="w-full rounded-2xl border border-[#E5E7EB] bg-white p-3 text-sm text-[#333333] outline-none focus:border-[#111111] focus:ring-2 focus:ring-[#111111]/10"
+                    />
+                    <p className="text-xs text-[#6B7280]">{copy.emailHelper}</p>
                   </label>
                   <div className="rounded-2xl border border-[#E5E7EB] bg-white p-4">
                     <p className="text-sm font-semibold text-[#111827]">{copy.gender}</p>
