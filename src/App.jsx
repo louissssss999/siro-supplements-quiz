@@ -76,7 +76,10 @@ const I18N = {
     next: "Next",
     submit: "Submit Survey",
     successTitle: "Thank you for your feedback!",
-    successReward: "You've earned 200 SiRo points! We will automatically add them to your account.",
+    successReward: "Create an account and receive 300 SiRo points.",
+    successBreakdown: "100 points for creating an account + 200 points for completing the survey.",
+    createAccount: "Create account",
+    loyaltyUrl: "https://sirosupplements.com/en/pages/loyalty-program",
     errors: {
       step1: "Please select a language.",
       step2base: "Please select at least one brand and at least one product.",
@@ -140,7 +143,10 @@ const I18N = {
     next: "Suivant",
     submit: "Envoyer l'enquete",
     successTitle: "Merci pour votre retour !",
-    successReward: "Vous avez gagne 200 points SiRo ! Ils seront ajoutes automatiquement a votre compte.",
+    successReward: "Creez un compte et recevez 300 points SiRo.",
+    successBreakdown: "100 points pour la creation du compte + 200 points pour avoir complete l'enquete.",
+    createAccount: "Creer un compte",
+    loyaltyUrl: "https://sirosupplements.com/fr/pages/loyalty-program",
     errors: {
       step1: "Veuillez selectionner une langue.",
       step2base: "Veuillez selectionner au moins une marque et au moins un produit.",
@@ -204,7 +210,10 @@ const I18N = {
     next: "Volgende",
     submit: "Quiz verzenden",
     successTitle: "Bedankt voor je feedback!",
-    successReward: "Je hebt 200 SiRo-punten verdiend! We voegen ze automatisch toe aan je account.",
+    successReward: "Maak een account en ontvang 300 SiRo-punten.",
+    successBreakdown: "100 punten voor het aanmaken van een account + 200 punten voor het invullen van de enquête.",
+    createAccount: "Account aanmaken",
+    loyaltyUrl: "https://sirosupplements.com/pages/loyalty-program",
     errors: {
       step1: "Selecteer een taal.",
       step2base: "Selecteer minstens een merk en minstens een product.",
@@ -890,6 +899,15 @@ function App() {
               <div className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl text-[#111111]">🎉</div>
               <h2 className="mt-4 text-2xl font-semibold text-[#111827]">{copy.successTitle}</h2>
               <p className="mx-auto mt-3 max-w-2xl text-sm text-[#6B7280]">{copy.successReward}</p>
+              <p className="mx-auto mt-2 max-w-2xl text-sm font-medium text-[#374151]">{copy.successBreakdown}</p>
+              <a
+                href={copy.loyaltyUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mx-auto mt-5 inline-flex items-center justify-center rounded-full border border-[#111111] bg-[#111111] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#333333]"
+              >
+                {copy.createAccount}
+              </a>
             </div>
           )}
 
