@@ -762,21 +762,21 @@ function App() {
                               {ratingCategories.map((category) => (
                                 <div key={category} className="rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-3 py-2">
                                   <p className="text-xs font-semibold text-[#111827]">{copy.ratings[category]}</p>
-                                  <div className="mt-1 flex items-center justify-between gap-2 text-[11px] text-[#6B7280]">
+                                  <div className="mt-1 flex justify-center gap-1">
+                                    {[1, 2, 3, 4, 5].map((value) => (
+                                      <button
+                                        key={value}
+                                        type="button"
+                                        onClick={() => handleProductRating(product, category, value)}
+                                        className="rounded p-1 hover:bg-[#ECEEF1]"
+                                      >
+                                        <Star filled={(ratingData[category] || 0) >= value} />
+                                      </button>
+                                    ))}
+                                  </div>
+                                  <div className="mt-1 flex justify-between text-[10px] text-[#6B7280]">
                                     <span>{copy.ratingScale[category].low}</span>
-                                    <div className="flex items-center gap-1">
-                                      {[1, 2, 3, 4, 5].map((value) => (
-                                        <button
-                                          key={value}
-                                          type="button"
-                                          onClick={() => handleProductRating(product, category, value)}
-                                          className="rounded p-1 hover:bg-[#ECEEF1]"
-                                        >
-                                          <Star filled={(ratingData[category] || 0) >= value} />
-                                        </button>
-                                      ))}
-                                    </div>
-                                    <span className="text-right">{copy.ratingScale[category].high}</span>
+                                    <span>{copy.ratingScale[category].high}</span>
                                   </div>
                                 </div>
                               ))}
